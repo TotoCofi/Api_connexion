@@ -59,6 +59,7 @@ def afficher_profil(request):
 
     return Response(response_data, status=status.HTTP_200_OK)
 
+@api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def deconnexion(request):
     user = request.user
