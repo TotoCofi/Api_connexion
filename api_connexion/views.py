@@ -6,6 +6,7 @@ from .serializer import UtilisateursSerializer
 from django.contrib.auth import authenticate
 from rest_framework.permissions import IsAuthenticated
 
+
 @api_view(['POST'])
 def inscription(request):
     if request.method == 'POST':
