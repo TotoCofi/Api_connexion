@@ -6,6 +6,7 @@ from .serializer import UtilisateursSerializer
 from django.contrib.auth import authenticate
 from rest_framework.permissions import IsAuthenticated
 
+
 @api_view(['POST'])
 def inscription(request):
     if request.method == 'POST':
@@ -19,10 +20,14 @@ def inscription(request):
             response_data = {
                 'message': "l'utilisateur est enregistre avec succès",
                 'user': users_serializer.data,
-                'access_token': token.key,  # Renvoyer la clé du token d'accès
+                'access_token': token.key, 
             }
 
-            return Response(response_data, status=status.HTTP_201_CREATED)
+            return Response({
+                'message': "l'utilisateur est enregistre avec succès",
+                'user': users_serializer.data,
+                'access_token': token.key, 
+            }, status=status.HTTP_201_CREATED)
         else:
             print(users_serializer.errors)
 
