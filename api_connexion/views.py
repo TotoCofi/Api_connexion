@@ -20,10 +20,16 @@ def inscription(request):
             response_data = {
                 'message': "l'utilisateur est enregistre avec succès",
                 'user': users_serializer.data,
-                'access_token': token.key,  # Renvoyer la clé du token d'accès
+                'access_token': token.key, 
             }
 
-            return Response(response_data, status=status.HTTP_201_CREATED)
+            return Response({
+                'message': "l'utilisateur est enregistre avec succès",
+                'user': users_serializer.data,
+                'access_token': token.key, 
+            }, status=status.HTTP_201_CREATED)
+        else:
+            print(users_serializer.errors)
 
         return Response({'users_errors': users_serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 

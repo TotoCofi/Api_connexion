@@ -40,6 +40,15 @@ INSTALLED_APPS = [
     'api_connexion',
     'rest_framework',
     'rest_framework.authtoken',
+    'corsheaders',
+]
+CORS_ALLOW_ALL_ORIGINS = True
+
+CORS_ALLOWED_ALL_ORIGINS = [
+    "http://127.0.0.1:8000",
+
+      # Remplacez par l'URL de votre application front-end
+    # Ajoutez d'autres URL autorisées si nécessaire
 ]
 
 MIDDLEWARE = [
@@ -50,6 +59,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'Api_auth.urls'
@@ -86,7 +97,14 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
+CORS_ALLOW_ALL_ORIGINS = True
 
+CORS_ALLOWED_ALL_ORIGINS = [
+    "http://127.0.0.1:8000",
+
+      # Remplacez par l'URL de votre application front-end
+    # Ajoutez d'autres URL autorisées si nécessaire
+]
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',

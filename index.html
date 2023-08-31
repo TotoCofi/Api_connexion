@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    
+<div class="container">
+	<!-- code here -->
+	<div class="card">
+		<div class="card-image">	
+			<h2 class="card-heading">
+				Get started
+				<small>Let us create your account</small>
+			</h2>
+		</div>
+		
+			<div class="input">
+				<input type="text" id='name'class="input-field" value="Alexander Parkinson" required/>
+				<label class="input-label">Username</label>
+			</div>
+			<div class="input">
+				<input type="email" id="email" class="input-field" value="vlockn@gmail.com" required/>
+				<label class="input-label">Email</label>
+			</div>
+				<div class="input">
+				<input type="password" id="pass" class="input-field" required/>
+				<label class="input-label">Password</label>
+			</div>
+			<div class="action">
+				<button type="submit" class="action-button" id="load-data">Get started</button>
+			</div>
+		
+		<div class="card-info">
+			<p>By signing up you are agreeing to our <a href="#">Terms and Conditions</a></p>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>
+
+<script>
+    $(document).ready(function() {
+        
+       
+        $("#load-data").click(function() {
+            
+        name=document.getElementById('name').value
+        email=document.getElementById('email').value
+        pass=document.getElementById('pass').value
+             if (name!=null && email!=null && pass!=null)
+        {
+        var postData = {
+            username: name,
+            email: email,
+            password: pass
+        };
+            $.ajax({
+                url: "http://127.0.0.1:8000/api/inscription/", 
+                method: "POST",
+                data:postData,
+                success: function(response) {
+                    console.log(response)
+                }
+            }) }
+    else{
+        alert('Veuillez remplir tout les chanps')
+    }
+        })
+   
+    })
+    </script>

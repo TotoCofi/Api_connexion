@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+
+<script>
+    $(document).ready(function() {
+        // Attacher un gestionnaire d'événement au bouton
+        $("#load-data").click(function() {
+            // Utiliser AJAX pour charger des données depuis un fichier ou une URL
+            $.ajax({
+                url: "exemple.json", // Remplacez par l'URL ou le chemin de votre endpoint
+                method: "GET",
+                dataType: "json", // Le type de données que vous attendez en réponse
+                success: function(data) {
+                    // La fonction exécutée en cas de succès de la requête
+                    // Insérer les données
+                }
+            })
+        })
+    })
+    </script>
