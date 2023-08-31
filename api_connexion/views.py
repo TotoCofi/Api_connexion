@@ -1,9 +1,10 @@
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view,permission_classes
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.authtoken.models import Token
 from .serializer import UtilisateursSerializer  
 from django.contrib.auth import authenticate
+from rest_framework.permissions import IsAuthenticated
 
 @api_view(['POST'])
 def inscription(request):
@@ -35,6 +36,30 @@ def connexion(request):
 
         if user is not None:
             token, created = Token.objects.get_or_create(user=user)
-            return Response({'message': 'User logged in successfully', 'access_token': token.key})
+            return Response({'message': 'Connexion réusir', 'access_token': token.key})
         else:
-            return Response({'message': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+            return Response({'message': 'Les donnée ne corrrespond'}, status=status.HTTP_401_UNAUTHORIZED)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def afficher_profil(request):
+    user = request.user
+    user_serializer = UtilisateursSerializer(user)  # Supposant que vous avez un serializer pour le modèle Utilisateur
+
+    response_data = {
+        'message': 'Pofile de Utilisateur',
+        'user_profile': user_serializer.data,
+    }
+
+    return Response(response_data, status=status.HTTP_200_OK)
+
+@permission_classes([IsAuthenticated])
+def deconnexion(request):
+    user = request.user
+    try:
+        token = Token.objects.get(user=user)
+        token.delete()  # Supprime le token d'accès associé à l'utilisateur
+        return Response({'message': 'utilisateur deconnecte'}, status=status.HTTP_200_OK)
+    except Token.DoesNotExist:
+        return Response({"message': 'utilisateur n'existe pas"}, status=status.HTTP_400_BAD_REQUEST)
