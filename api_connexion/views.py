@@ -23,6 +23,8 @@ def inscription(request):
             }
 
             return Response(response_data, status=status.HTTP_201_CREATED)
+        else:
+            print(users_serializer.errors)
 
         return Response({'users_errors': users_serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
