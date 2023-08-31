@@ -36,7 +36,7 @@
 			</div>
 		
 		<div class="card-info">
-			<p>By signing up you are agreeing to our <a href="#">Terms and Conditions</a></p>
+			<p>By signing up you are agreeing to our <a href="connexion.html">Connexion</a></p>
 		</div>
 	</div>
 </div>
@@ -63,6 +63,7 @@
             $.ajax({
                 url: "http://127.0.0.1:8000/api/inscription/", 
                 method: "POST",
+                
                 data:postData,
                 success: function(response) {
 console.log(response)
