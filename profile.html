@@ -7,7 +7,9 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Document</title>
 </head>
-<body>
+<body><div class="action">
+    <button type="submit" class="action-button" id="load-data">Deconnexion</button>
+</div>
     
 </body>
 </html>
@@ -41,9 +43,42 @@
            
             
             
+             
+        
+       
+                $("#load-data").click(function() {
+                    
+                    fetch('http://127.0.0.1:8000/api/deconnexion/', {
+                        method: 'GET',
+                        headers: {
+                          'Authorization': `Token ${authToken}`
+                        }
+                      })
+                        .then(response => {
+                          if (!response.ok) {
+                            throw new Error(`Request failed with status ${response.status}`);
+                          }
+                          return response.json();
+                        })
+                        .then(responseData => {
+                        
+                            localStorage.setItem('token',null);
+                        })
+                        .catch(error => {
+                          console.error('Error:', error.message);
+                        });
+                    })
+                     
+                      
+                      
+                       
+                
+                 
+           
             
             
             
     
     })
+
     </script>
