@@ -1,3 +1,4 @@
+from .models import Utilisateurs
 from rest_framework.decorators import api_view,permission_classes
 from rest_framework.response import Response
 from rest_framework import status
@@ -36,9 +37,9 @@ def connexion(request):
         username = request.data.get('username')
         password = request.data.get('password')
 
-        user = authenticate(username=username, password=password)
+        user = Utilisateurs.objects.get(username=username)
 
-        if user is not None:
+        if user.check_password(password):
             token, created = Token.objects.get_or_create(user=user)
             return Response({'message': 'Connexion réusir', 'access_token': token.key})
         else:
