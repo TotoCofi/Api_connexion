@@ -14,7 +14,9 @@ def inscription(request):
         users_serializer = UtilisateursSerializer(data=request.data)  # Serializer les données
         if users_serializer.is_valid():
             user = users_serializer.save()
-            user.set_password(request.data['password'])  # Hacher le mot de passe
+            user.set_password(request.data['password'])
+            user.is_active = True
+
             user.save()
 
             # Générer un token d'accès et l'associer à l'utilisateur
