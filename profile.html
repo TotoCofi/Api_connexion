@@ -17,14 +17,33 @@
         // Attacher un gestionnaire d'événement au bouton
       
             // Utiliser AJAX pour charger des données depuis un fichier ou une URL
-            $.ajax({
-                url: "exemple.json", // Remplacez par l'URL ou le chemin de votre endpoint
-                method: "GET", // Le type de données que vous attendez en réponse
-                success: function(data) {
-
-
-                }
+            const authToken = localStorage.getItem('token');
+            const apiUrl = 'http://127.0.0.1:8000/api/affiche_profile/';
+            
+            fetch(apiUrl, {
+              method: 'GET',
+              headers: {
+                'Authorization': `Token ${authToken}`
+              }
             })
+              .then(response => {
+                if (!response.ok) {
+                  throw new Error(`Request failed with status ${response.status}`);
+                }
+                return response.json();
+              })
+              .then(responseData => {
+                console.log('Response:', responseData);
+              })
+              .catch(error => {
+                console.error('Error:', error.message);
+              });
+           
+            
+            
+            
+            
+            
     
     })
     </script>

@@ -20,7 +20,7 @@
 		</div>
 			
 			<div class="input">
-				<input type="email" id="email" class="input-field" value="vlockn@gmail.com" required/>
+				<input type="text" id="email" class="input-field"  required/>
 				<label class="input-label">Email</label>
 			</div>
 						<div class="input">
@@ -46,16 +46,16 @@
             if ( email!=null &&pass!=null)
             { var postData = {
               
-            email: email,
+            username: email,
             password: pass
             };
             $.ajax({
-                url: "http://127.0.0.1:8000/connexion/", 
+                url: "http://127.0.0.1:8000/api/connexion/", 
                 method: "POST",
                 data:postData, 
                 success: function(data) {
 
-                    console.log(data)
+                    localStorage.setItem('token', data.access_token);
                 }
             })
         }
