@@ -18,10 +18,11 @@
 				<small>Let us create your account</small>
 			</h2>
 		</div>
-			
+        <h2 class="card-heading" id='message'>
+        </h2>
 			<div class="input">
 				<input type="text" id="email" class="input-field"  required/>
-				<label class="input-label">Email</label>
+				<label class="input-label">username</label>
 			</div>
 						<div class="input">
 				<input type="password" id="pass" class="input-field" required/>
@@ -40,6 +41,9 @@
 </html>
 <script>
     $(document).ready(function() {
+        const url = new URL(window.location.href);
+
+        document.getElementById('message').innerHTML = new URLSearchParams(url.message);
         $("#load-data").click(function() {
             email=document.getElementById('email').value
             pass=document.getElementById('pass').value
@@ -56,6 +60,8 @@
                 success: function(data) {
 
                     localStorage.setItem('token', data.access_token);
+                    
+                    window.location.href = 'profile.html?message='+data.message;
                 }
             })
         }

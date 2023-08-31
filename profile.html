@@ -3,12 +3,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Document</title>
 </head>
 <body><div class="action">
-    <button type="submit" class="action-button" id="load-data">Deconnexion</button>
+    
+    <button type="submit" class="action-button" id="load-data"></button>
 </div>
     
 </body>
@@ -36,6 +38,7 @@
               })
               .then(responseData => {
                 console.log('Response:', responseData);
+                document.getElementById('load-data').innerHTML='Deconnexion '+responseData.user_profile.username
               })
               .catch(error => {
                 console.error('Error:', error.message);
@@ -61,7 +64,7 @@
                           return response.json();
                         })
                         .then(responseData => {
-                        
+                            window.location.href = 'index.html?message='+responseData.message;
                             localStorage.setItem('token',null);
                         })
                         .catch(error => {

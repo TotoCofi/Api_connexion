@@ -18,7 +18,8 @@
 				<small>Let us create your account</small>
 			</h2>
 		</div>
-		
+        <h2 class="card-heading" id='message'>
+        </h2>
 			<div class="input">
 				<input type="text" id='name'class="input-field" value="Alexander Parkinson" required/>
 				<label class="input-label">Username</label>
@@ -47,7 +48,10 @@
 <script>
     $(document).ready(function() {
         
-       
+        const url = new URL(window.location.href);
+
+        // Obtenez les paramètres de la requête
+        document.getElementById('message').innerHTML = new URLSearchParams(url.message);
         $("#load-data").click(function() {
             
         name=document.getElementById('name').value
@@ -66,7 +70,8 @@
                 
                 data:postData,
                 success: function(response) {
-                    localStorage.setItem('token', response.access_token);
+
+                    window.location.href = 'connexion.html?message='+response.message;
                 }
             }) }
     else{

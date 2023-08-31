@@ -20,13 +20,10 @@ def inscription(request):
             user.save()
 
             # Générer un token d'accès et l'associer à l'utilisateur
-            token, created = Token.objects.get_or_create(user=user)
 
           
             return Response({
                 'message': "l'utilisateur est enregistre avec succès",
-                'user': users_serializer.data,
-                'access_token': token.key, 
             }, status=status.HTTP_201_CREATED)
         else:
             print(users_serializer.errors)
